@@ -12,7 +12,7 @@ def get_weather():
         print(response.text)
 
     except requests.exceptions.RequestException as e:
-        print(f"Ошибка при запросе: {e}")
+        print(f"Ошибка во время запроса: {e}")
 
 
 if __name__ == "__main__":
