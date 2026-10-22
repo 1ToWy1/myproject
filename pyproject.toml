@@ -1,0 +1,53 @@
+[project]
+name = "myproject"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "1ToWy1",email = "ramill220033@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "requests (>=2.34.2,<3.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "myproject", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "ruff (>=0.17.1,<0.18.0)"
+]
+[tool.ruff]
+# Базовые глобальные настройки
+target-version = "py314"   # Указываем версию Python
+line-length = 88           # Стандартная длина строки
+exclude = [                # Исключаем служебные папки
+    ".venv",
+    "__pycache__",
+    ".git",
+]
+
+[tool.ruff.lint]
+# Включаем запрошенные наборы правил
+select = [
+    "E",    # pycodestyle (ошибки)
+    "W",    # pycodestyle (предупреждения)
+    "F",    # pyflakes
+    "I",    # isort
+    "C90",  # mccabe
+    "PL",   # pylint
+    "N",    # pep8-naming
+    "SIM",  # flake8-simplify
+]
+
+[tool.ruff.format]
+# Настройки форматтера
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
