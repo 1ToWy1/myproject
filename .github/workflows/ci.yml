@@ -25,7 +25,7 @@ jobs:
         run: poetry run ruff check .
 
       - name: Run pre-commit (lint hooks)
-        run: poetry run pre-commit run --all-files ruff-check ruff-format
+        run: poetry run pre-commit run --all-files --hook-stage pre-commit
 
       - name: Run mypy
         run: poetry run mypy .
