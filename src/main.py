@@ -1,11 +1,11 @@
 import requests
 
 
-def get_weather():
+def get_weather() -> None:
     url = "https://wttr.in/?format=3"
 
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
 
         print("Текущая погода:")

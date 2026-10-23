@@ -19,18 +19,27 @@ jobs:
           version: latest
           
       - name: Install dependencies
-        run: poetry install --no-interaction --no-root
-        
+        run: poetry install --no-interaction --no-root --with dev
+
       - name: Run Ruff
         run: poetry run ruff check .
+
+      - name: Run pre-commit (lint hooks)
+        run: poetry run pre-commit run --all-files ruff-check ruff-format
+
+      - name: Run mypy
+        run: poetry run mypy .
+
+      - name: Run bandit
+        run: poetry run bandit -c pyproject.toml -r .
 
   docker-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Build Docker image
         run: docker build -t myproject-test .
-        
+
       - name: Run pytest inside Docker
         run: docker run myproject-test
