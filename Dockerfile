@@ -9,4 +9,4 @@ RUN poetry config virtualenvs.create false && poetry install --no-interaction --
 
 COPY . .
 
-CMD ["poetry", "run", "pytest"]
+CMD ["python", "-m", "pytest"]
