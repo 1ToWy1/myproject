@@ -1,0 +1,42 @@
+﻿default_install_hook_types: [pre-commit, pre-push]
+
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: poetry run ruff check --fix
+        language: system
+        types: [python]
+        stages: [pre-commit]
+
+      - id: ruff-format
+        name: ruff format
+        entry: poetry run ruff format
+        language: system
+        types: [python]
+        stages: [pre-commit]
+
+      - id: mypy
+        name: mypy
+        entry: poetry run mypy .
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: bandit
+        name: bandit
+        entry: poetry run bandit -c pyproject.toml -r .
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: pytest
+        name: pytest
+        entry: poetry run pytest
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [pre-push]

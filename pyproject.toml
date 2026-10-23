@@ -20,24 +20,37 @@ build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
 dev = [
-    "ruff (>=0.17.1,<0.18.0)"
+    "ruff (>=0.17.1,<0.18.0)",
+    "mypy (>=2.4.0,<3.0.0)",
+    "bandit (>=1.9.4,<2.0.0)",
+    "pre-commit (>=4.7.0,<5.0.0)"
 ]
+
 [tool.ruff]
 target-version = "py314"
-line-length = 88
+line-length = 80
 exclude = [".venv", "__pycache__", ".git"]
-
 unsafe-fixes = true
 
 [tool.ruff.lint]
 select = [
     "E", "W", "F", "I", "C90", "PL", "N", "SIM", "ARG"
 ]
-
-ignore = ["E501"]
+ignore = ["E501", "F401"]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "auto"
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.bandit]
+targets = ["src", "app"]
+exclude_dirs = ["tests", ".venv", "__pycache__"]
+severity = "low"
+confidence = "low"
